@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Models.Extensions
 {
-    static class EntityExtensions
+    static class EntitiesExtensions
     {
         public static T Parse<T>(this string value)
         {
