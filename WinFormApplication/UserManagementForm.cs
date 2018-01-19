@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace WinFormApplication
 {
-    public partial class MainForm : Form
+    public partial class UserManagementForm : Form
     {
-        public MainForm()
+        public UserManagementForm()
         {
             InitializeComponent();
-        }
-
-        private void beginTransaction_Button_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

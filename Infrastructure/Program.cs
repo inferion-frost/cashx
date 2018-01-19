@@ -23,8 +23,8 @@ namespace Infrastructure
         static void Main(string[] args)
         {
             var mapper = mapperConfiguration().CreateMapper();
-            var personRepository = new PersonRepository("Data Source=MyData.sdf;Persist Security Info=False;");
-            var personService = new PersonService(personRepository);
+            var connectionString = "Data Source=MyData.sdf;Persist Security Info=False;";
+            var personService = new PersonService(new Connection(connectionString));
             var personServiceFacade = new PersonServiceFacade(mapper, personService);
             foreach (var item in personServiceFacade.GetPeople())
             {

@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Connection.cs" />
     <Compile Include="Models\Constants\TransactionType.cs" />
     <Compile Include="Models\DTO\Person.cs" />
     <Compile Include="Models\Entities\Account.cs" />
@@ -71,8 +72,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Facades\PersonServiceFacade.cs" />
     <Compile Include="Facades\Interfaces.cs" />
-    <Compile Include="Repositories\Interfaces.cs" />
-    <Compile Include="Repositories\PersonRepository.cs" />
     <Compile Include="Services\PersonService.cs" />
     <Compile Include="Services\Interfaces.cs" />
   </ItemGroup>

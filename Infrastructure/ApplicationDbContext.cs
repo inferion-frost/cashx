@@ -17,6 +17,5 @@ namespace Infrastructure
         {
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }

@@ -14,6 +14,6 @@ namespace Infrastructure.Services
         Person GetPerson(long personId);
         void DeletePerson(long personId);
         ICollection<Person> GetPeople();
-        ICollection<Person> GetPeople(Predicate<Person> filter);
+        ICollection<Person> GetPeople(Func<Person,bool> filter);
     }
 }
