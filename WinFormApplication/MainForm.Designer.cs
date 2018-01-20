@@ -30,7 +30,6 @@
         {
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.добавитьПользователяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dashBoard_Panel = new System.Windows.Forms.Panel();
@@ -55,17 +54,23 @@
             this.birthDate_TextBox = new System.Windows.Forms.TextBox();
             this.email_TextBox = new System.Windows.Forms.TextBox();
             this.balance_TextBox = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.transactions_Panel = new System.Windows.Forms.Panel();
             this.transactions_GroupBox = new System.Windows.Forms.GroupBox();
-            this.transactions_ListView = new System.Windows.Forms.ListView();
+            this.transactions_DataGridView = new System.Windows.Forms.DataGridView();
+            this.transactionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transactionDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transactionSum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transactionDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mainMenuStrip.SuspendLayout();
             this.dashBoard_Panel.SuspendLayout();
             this.transaction_GroupBox.SuspendLayout();
             this.transaction_LayoutPanel.SuspendLayout();
             this.userPanel_GroupBox.SuspendLayout();
             this.user_LayoutPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.transactions_Panel.SuspendLayout();
             this.transactions_GroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.transactions_DataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -75,30 +80,24 @@
             this.справкаToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.Size = new System.Drawing.Size(640, 24);
+            this.mainMenuStrip.Size = new System.Drawing.Size(942, 24);
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "menuStrip1";
             // 
             // файлToolStripMenuItem
             // 
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.добавитьПользователяToolStripMenuItem,
             this.выходToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
-            // добавитьПользователяToolStripMenuItem
-            // 
-            this.добавитьПользователяToolStripMenuItem.Name = "добавитьПользователяToolStripMenuItem";
-            this.добавитьПользователяToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
-            this.добавитьПользователяToolStripMenuItem.Text = "Управление пользователями";
-            // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.выходToolStripMenuItem.Text = "Выход";
+            this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem
             // 
@@ -170,7 +169,8 @@
             // transactionSum_Label
             // 
             this.transactionSum_Label.AutoSize = true;
-            this.transactionSum_Label.Location = new System.Drawing.Point(3, 64);
+            this.transactionSum_Label.Location = new System.Drawing.Point(3, 69);
+            this.transactionSum_Label.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.transactionSum_Label.Name = "transactionSum_Label";
             this.transactionSum_Label.Size = new System.Drawing.Size(41, 13);
             this.transactionSum_Label.TabIndex = 2;
@@ -179,7 +179,8 @@
             // transactionDescription_Label
             // 
             this.transactionDescription_Label.AutoSize = true;
-            this.transactionDescription_Label.Location = new System.Drawing.Point(3, 0);
+            this.transactionDescription_Label.Location = new System.Drawing.Point(3, 5);
+            this.transactionDescription_Label.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.transactionDescription_Label.Name = "transactionDescription_Label";
             this.transactionDescription_Label.Size = new System.Drawing.Size(66, 26);
             this.transactionDescription_Label.TabIndex = 1;
@@ -196,7 +197,8 @@
             // transactionType_Label
             // 
             this.transactionType_Label.AutoSize = true;
-            this.transactionType_Label.Location = new System.Drawing.Point(3, 89);
+            this.transactionType_Label.Location = new System.Drawing.Point(3, 94);
+            this.transactionType_Label.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.transactionType_Label.Name = "transactionType_Label";
             this.transactionType_Label.Size = new System.Drawing.Size(66, 26);
             this.transactionType_Label.TabIndex = 5;
@@ -212,9 +214,10 @@
             // transactionDateTime_Label
             // 
             this.transactionDateTime_Label.AutoSize = true;
-            this.transactionDateTime_Label.Location = new System.Drawing.Point(3, 122);
+            this.transactionDateTime_Label.Location = new System.Drawing.Point(3, 127);
+            this.transactionDateTime_Label.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.transactionDateTime_Label.Name = "transactionDateTime_Label";
-            this.transactionDateTime_Label.Size = new System.Drawing.Size(45, 26);
+            this.transactionDateTime_Label.Size = new System.Drawing.Size(45, 25);
             this.transactionDateTime_Label.TabIndex = 7;
             this.transactionDateTime_Label.Text = "Дата и время";
             // 
@@ -264,7 +267,8 @@
             // fullName_Label
             // 
             this.fullName_Label.AutoSize = true;
-            this.fullName_Label.Location = new System.Drawing.Point(3, 0);
+            this.fullName_Label.Location = new System.Drawing.Point(3, 5);
+            this.fullName_Label.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.fullName_Label.Name = "fullName_Label";
             this.fullName_Label.Size = new System.Drawing.Size(34, 13);
             this.fullName_Label.TabIndex = 0;
@@ -273,7 +277,8 @@
             // birthDate_Label
             // 
             this.birthDate_Label.AutoSize = true;
-            this.birthDate_Label.Location = new System.Drawing.Point(3, 29);
+            this.birthDate_Label.Location = new System.Drawing.Point(3, 34);
+            this.birthDate_Label.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.birthDate_Label.Name = "birthDate_Label";
             this.birthDate_Label.Size = new System.Drawing.Size(86, 13);
             this.birthDate_Label.TabIndex = 1;
@@ -282,7 +287,8 @@
             // email_Label
             // 
             this.email_Label.AutoSize = true;
-            this.email_Label.Location = new System.Drawing.Point(3, 58);
+            this.email_Label.Location = new System.Drawing.Point(3, 63);
+            this.email_Label.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.email_Label.Name = "email_Label";
             this.email_Label.Size = new System.Drawing.Size(37, 13);
             this.email_Label.TabIndex = 2;
@@ -293,7 +299,8 @@
             this.balance_Label.AutoSize = true;
             this.balance_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.balance_Label.ForeColor = System.Drawing.Color.Black;
-            this.balance_Label.Location = new System.Drawing.Point(3, 87);
+            this.balance_Label.Location = new System.Drawing.Point(3, 92);
+            this.balance_Label.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.balance_Label.Name = "balance_Label";
             this.balance_Label.Size = new System.Drawing.Size(105, 13);
             this.balance_Label.TabIndex = 3;
@@ -331,38 +338,92 @@
             this.balance_TextBox.Size = new System.Drawing.Size(167, 20);
             this.balance_TextBox.TabIndex = 7;
             // 
-            // panel1
+            // transactions_Panel
             // 
-            this.panel1.Controls.Add(this.transactions_GroupBox);
-            this.panel1.Location = new System.Drawing.Point(320, 27);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(308, 374);
-            this.panel1.TabIndex = 3;
+            this.transactions_Panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.transactions_Panel.Controls.Add(this.transactions_GroupBox);
+            this.transactions_Panel.Location = new System.Drawing.Point(320, 27);
+            this.transactions_Panel.Name = "transactions_Panel";
+            this.transactions_Panel.Size = new System.Drawing.Size(610, 372);
+            this.transactions_Panel.TabIndex = 3;
             // 
             // transactions_GroupBox
             // 
-            this.transactions_GroupBox.Controls.Add(this.transactions_ListView);
+            this.transactions_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.transactions_GroupBox.Controls.Add(this.transactions_DataGridView);
             this.transactions_GroupBox.Location = new System.Drawing.Point(3, 3);
             this.transactions_GroupBox.Name = "transactions_GroupBox";
-            this.transactions_GroupBox.Size = new System.Drawing.Size(305, 369);
+            this.transactions_GroupBox.Size = new System.Drawing.Size(604, 367);
             this.transactions_GroupBox.TabIndex = 0;
             this.transactions_GroupBox.TabStop = false;
             this.transactions_GroupBox.Text = "Транзакции";
             // 
-            // transactions_ListView
+            // transactions_DataGridView
             // 
-            this.transactions_ListView.Location = new System.Drawing.Point(6, 19);
-            this.transactions_ListView.Name = "transactions_ListView";
-            this.transactions_ListView.Size = new System.Drawing.Size(293, 344);
-            this.transactions_ListView.TabIndex = 0;
-            this.transactions_ListView.UseCompatibleStateImageBehavior = false;
+            this.transactions_DataGridView.AllowUserToAddRows = false;
+            this.transactions_DataGridView.AllowUserToDeleteRows = false;
+            this.transactions_DataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.transactions_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.transactions_DataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.transactionId,
+            this.transactionDescription,
+            this.transactionSum,
+            this.transactionType,
+            this.transactionDateTime});
+            this.transactions_DataGridView.Location = new System.Drawing.Point(6, 19);
+            this.transactions_DataGridView.Name = "transactions_DataGridView";
+            this.transactions_DataGridView.ReadOnly = true;
+            this.transactions_DataGridView.Size = new System.Drawing.Size(592, 344);
+            this.transactions_DataGridView.TabIndex = 0;
+            // 
+            // transactionId
+            // 
+            this.transactionId.Frozen = true;
+            this.transactionId.HeaderText = "Идентификатор";
+            this.transactionId.Name = "transactionId";
+            this.transactionId.ReadOnly = true;
+            this.transactionId.Width = 50;
+            // 
+            // transactionDescription
+            // 
+            this.transactionDescription.Frozen = true;
+            this.transactionDescription.HeaderText = "Описание";
+            this.transactionDescription.Name = "transactionDescription";
+            this.transactionDescription.ReadOnly = true;
+            // 
+            // transactionSum
+            // 
+            this.transactionSum.Frozen = true;
+            this.transactionSum.HeaderText = "Сумма";
+            this.transactionSum.Name = "transactionSum";
+            this.transactionSum.ReadOnly = true;
+            // 
+            // transactionType
+            // 
+            this.transactionType.Frozen = true;
+            this.transactionType.HeaderText = "Тип транзакции";
+            this.transactionType.Name = "transactionType";
+            this.transactionType.ReadOnly = true;
+            // 
+            // transactionDateTime
+            // 
+            this.transactionDateTime.Frozen = true;
+            this.transactionDateTime.HeaderText = "Дата и Время";
+            this.transactionDateTime.Name = "transactionDateTime";
+            this.transactionDateTime.ReadOnly = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(640, 413);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(942, 413);
+            this.Controls.Add(this.transactions_Panel);
             this.Controls.Add(this.dashBoard_Panel);
             this.Controls.Add(this.mainMenuStrip);
             this.MainMenuStrip = this.mainMenuStrip;
@@ -376,8 +437,9 @@
             this.userPanel_GroupBox.ResumeLayout(false);
             this.user_LayoutPanel.ResumeLayout(false);
             this.user_LayoutPanel.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.transactions_Panel.ResumeLayout(false);
             this.transactions_GroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.transactions_DataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -390,9 +452,8 @@
         private System.Windows.Forms.Panel dashBoard_Panel;
         private System.Windows.Forms.GroupBox transaction_GroupBox;
         private System.Windows.Forms.GroupBox userPanel_GroupBox;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel transactions_Panel;
         private System.Windows.Forms.GroupBox transactions_GroupBox;
-        private System.Windows.Forms.ListView transactions_ListView;
         private System.Windows.Forms.TableLayoutPanel user_LayoutPanel;
         private System.Windows.Forms.Label fullName_Label;
         private System.Windows.Forms.Label birthDate_Label;
@@ -412,9 +473,14 @@
         private System.Windows.Forms.DateTimePicker transaction_DateTimePicker;
         private System.Windows.Forms.Label transactionDateTime_Label;
         private System.Windows.Forms.Button beginTransaction_Button;
-        private System.Windows.Forms.ToolStripMenuItem добавитьПользователяToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
+        private System.Windows.Forms.DataGridView transactions_DataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transactionId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transactionDescription;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transactionSum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transactionDateTime;
     }
 }
 

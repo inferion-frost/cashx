@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Models.Constants
 {
-    enum TransactionType
+    public enum TransactionType
     {
         Incoming,
         Outcoming

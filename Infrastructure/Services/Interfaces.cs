@@ -1,9 +1,6 @@
 ﻿using Infrastructure.Models.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
@@ -16,4 +13,23 @@ namespace Infrastructure.Services
         ICollection<Person> GetPeople();
         ICollection<Person> GetPeople(Func<Person,bool> filter);
     }
+
+    internal interface IAccountService
+    {
+        Account CreateAccount(Account account);
+        Account UpdateAccount(Account account);
+        Account GetAccount(long accountId);
+        void DeleteAccount(long accountId);
+        ICollection<Account> GetAccounts(long personId);
+    }
+
+    internal interface ITransactionService
+    {
+        Transaction CreateTransaction(Transaction transaction);
+        Transaction UpdateTransaction(Transaction transaction);
+        Transaction GetTransaction(long transactionId);
+        void DeleteTransaction(long transactionId);
+        ICollection<Transaction> GetTransactions(long accountId);
+    }
+
 }

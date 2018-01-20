@@ -16,10 +16,15 @@ namespace Infrastructure.Models.Entities
             get { return TransactionType.ToString(); }
             set { TransactionType = value.Parse<TransactionType>(); }
         }
+
+        [Required]
+        public string Description { get; set; }
         
         [Required]
         public decimal Balance { get; set; }
 
         public Account Account { get; set; }
+
+        public long AccountId { get; set; }
     }
 }

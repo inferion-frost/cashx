@@ -21,6 +21,7 @@ namespace Infrastructure.Services
                 using (var transaction = context.Database.BeginTransaction())
                 {
                     context.People.Add(person);
+                    context.SaveChanges();
                     transaction.Commit();
                 }
             }
@@ -35,6 +36,8 @@ namespace Infrastructure.Services
                 {
                     var person = GetPerson(personId);
                     context.People.Remove(person);
+                    context.SaveChanges();
+                    transaction.Commit();
                 }
             }
         }

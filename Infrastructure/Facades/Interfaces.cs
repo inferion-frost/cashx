@@ -1,12 +1,13 @@
 ﻿using Infrastructure.Models.DTO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Facades
 {
+    public interface IServiceFacadeFactory
+    {
+        IPersonServiceFacade GetPersonServiceFacade();
+    }
+
     public interface IPersonServiceFacade
     {
         GetPersonDTO CreatePerson(CreatePersonDTO createPersonDTO);
@@ -14,5 +15,18 @@ namespace Infrastructure.Facades
         GetPersonDTO GetPerson(long personId);
         void DeletePerson(long personId);
         ICollection<GetPersonDTO> GetPeople();
+    }
+
+    public interface IAccountServiceFacade
+    {
+        GetAccountDTO CreateAccount(long personId);
+        GetAccountDTO GetAccount(long accountId);
+        ICollection<GetAccountDTO> GetAccounts(long personId);
+    }
+
+    public interface ITransactionServiceFacade
+    {
+        ICollection<GetTransactionDTO> GetTransactions(long accountId);
+        GetTransactionDTO CreateTransaction(CreateTransactionDTO transaction);
     }
 }
