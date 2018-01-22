@@ -60,8 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="Connection.cs" />
+    <Compile Include="DbContextFactory.cs" />
+    <Compile Include="Facades\AccountServiceFacade.cs" />
     <Compile Include="Facades\ServiceFacadeFactory.cs" />
+    <Compile Include="Facades\TransactionServiceFacade.cs" />
     <Compile Include="MapperConfiguration.cs" />
     <Compile Include="Models\Constants\TransactionType.cs" />
     <Compile Include="Models\DTO\Account.cs" />

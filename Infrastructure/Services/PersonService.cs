@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Infrastructure.Models.Entities;
 
 namespace Infrastructure.Services
 {
     internal class PersonService : IPersonService
     {
-        private Connection _connection;
+        private DbContextFactory _connection;
+        private IAccountService _accountService;
 
-        public PersonService(Connection connection)
+        public PersonService(DbContextFactory connection,
+            IAccountService accountService)
         {
             _connection = connection;
+            _accountService = accountService;
         }
 
         public Person CreatePerson(Person person)
         {
             using (var context = _connection.GetContext())
             {
-                using (var transaction = context.Database.BeginTransaction())
-                {
-                    context.People.Add(person);
-                    context.SaveChanges();
-                    transaction.Commit();
-                }
+                context.People.Add(person);
+                context.Accounts.Add(new Account { Owner = person, Balance = 0M });
+                context.SaveChanges();
             }
             return person;
         }
@@ -32,13 +33,9 @@ namespace Infrastructure.Services
         {
             using (var context = _connection.GetContext())
             {
-                using (var transaction = context.Database.BeginTransaction())
-                {
-                    var person = GetPerson(personId);
-                    context.People.Remove(person);
-                    context.SaveChanges();
-                    transaction.Commit();
-                }
+                var person = context.People.Find(personId);
+                context.People.Remove(person);
+                context.SaveChanges();
             }
         }
 
@@ -50,7 +47,7 @@ namespace Infrastructure.Services
             }
         }
 
-        public ICollection<Person> GetPeople(Func<Person,bool> filter)
+        public ICollection<Person> GetPeople(Func<Person, bool> filter)
         {
             using (var context = _connection.GetContext())
             {
@@ -73,7 +70,7 @@ namespace Infrastructure.Services
                 context.Entry(person).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }
-            return person; 
+            return person;
         }
     }
 }

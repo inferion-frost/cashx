@@ -17,12 +17,6 @@ namespace WinFormApplication
 {
     public partial class NewUserForm : Form
     {
-        private static readonly string _connectionString =
-            ConfigurationManager.ConnectionStrings["SqlServerCe"].ConnectionString;
-
-        private static readonly IServiceFacadeFactory serviceFacadeFactory =
-            new ServiceFacadeFactory(_connectionString);
-
         public NewUserForm()
         {
             InitializeComponent();
@@ -30,7 +24,7 @@ namespace WinFormApplication
 
         private void enter_Button_Click(object sender, EventArgs e)
         {
-            var personService = serviceFacadeFactory.GetPersonServiceFacade();
+            var personService = ServiceProvider.GetPersonService();
             var newPerson = new CreatePersonDTO()
             {
                 FullName = userFullName_TextBox.Text,
@@ -43,7 +37,7 @@ namespace WinFormApplication
                 personService.CreatePerson(newPerson);
                 Close();
             }
-            catch
+            catch(Exception ex)
             {
                 MessageBox.Show("Попробуйте заполнить все поля");
             }

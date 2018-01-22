@@ -23,7 +23,7 @@ namespace Infrastructure.Models.Entities
         [Required]
         public decimal Balance { get; set; }
 
-        public Account Account { get; set; }
+        public virtual Account Account { get; set; }
 
         public long AccountId { get; set; }
     }

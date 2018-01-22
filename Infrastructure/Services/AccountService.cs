@@ -8,15 +8,16 @@ namespace Infrastructure.Services
 {
     class AccountService : IAccountService
     {
-        private readonly Connection _connection;
+        private readonly DbContextFactory _connection;
 
-        public AccountService(Connection connection)
+        public AccountService(DbContextFactory connection)
         {
             _connection = connection;
         }
 
-        public Account CreateAccount(Account account)
+        public Account CreateAccount(long personId)
         {
+            Account account = new Account() { OwnerId = personId, Balance = 0m };
             using (var context = _connection.GetContext())
             {
                 context.Accounts.Add(account);
@@ -38,8 +39,7 @@ namespace Infrastructure.Services
         {
             using (var context = _connection.GetContext())
             {
-                return context.Accounts.FirstOrDefault(
-                    account => account.Id == accountId) ??  throw new ArgumentException();
+                return context.Accounts.Find(accountId);
             }
         }
 
@@ -47,7 +47,7 @@ namespace Infrastructure.Services
         {
             using (var context = _connection.GetContext())
             {
-                return context.Accounts.ToList();
+                return context.Accounts.Where(account => account.OwnerId == personId).ToList();
             }
         }
 

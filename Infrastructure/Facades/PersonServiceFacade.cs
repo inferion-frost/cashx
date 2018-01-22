@@ -12,7 +12,9 @@ namespace Infrastructure.Facades
         private readonly IMapper _mapper;
         private readonly IPersonService _personService;
 
-        public PersonServiceFacade(IMapper mapper, IPersonService personService)
+        public PersonServiceFacade(
+            IMapper mapper, 
+            IPersonService personService)
         {
             _mapper = mapper;
             _personService = personService;
@@ -21,7 +23,7 @@ namespace Infrastructure.Facades
         public GetPersonDTO CreatePerson(CreatePersonDTO createPersonDTO)
         {
             var person = _mapper.Map<Person>(createPersonDTO);
-            _personService.CreatePerson(person);
+             _personService.CreatePerson(person);
             return _mapper.Map<GetPersonDTO>(person);
         }
 

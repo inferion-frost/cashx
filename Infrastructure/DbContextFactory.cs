@@ -2,11 +2,11 @@
 
 namespace Infrastructure
 {
-    internal class Connection
+    internal class DbContextFactory
     {
         private readonly string _connectionString;
 
-        public Connection(string connectionString)
+        public DbContextFactory(string connectionString)
         {
             _connectionString = connectionString ?? throw new ArgumentNullException();
         }

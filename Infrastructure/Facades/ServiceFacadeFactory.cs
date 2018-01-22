@@ -1,21 +1,35 @@
-﻿using Infrastructure.Services;
+﻿using AutoMapper;
+using Infrastructure.Services;
 
 namespace Infrastructure.Facades
 {
     public class ServiceFacadeFactory : IServiceFacadeFactory
     {
-        private string ConnectionString { get; }
+        private readonly DbContextFactory Connection;
+        private readonly IMapper Mapper;
 
         public ServiceFacadeFactory(string connectionString)
         {
-            ConnectionString = connectionString;
+            Connection = new DbContextFactory(connectionString);
+            Mapper = ApplicationMapper.GetMapper();
         }
 
         public IPersonServiceFacade GetPersonServiceFacade()
         {
             return new PersonServiceFacade(
-                MapperConfigurator.MapperConfiguration(),
-                new PersonService(new Connection(ConnectionString)));
+                Mapper, new PersonService(Connection, new AccountService(Connection)));
+        }
+
+        public ITransactionServiceFacade GetTransactionServiceFacade()
+        {
+            return new TransactionServiceFacade(
+                Mapper, new TransactionService(Connection));
+        }
+
+        public IAccountServiceFacade GetAccountServiceFacade()
+        {
+            return new AccountServiceFacade(
+                Mapper, new AccountService(Connection));
         }
     }
 }

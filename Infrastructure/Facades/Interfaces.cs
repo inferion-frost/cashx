@@ -6,6 +6,8 @@ namespace Infrastructure.Facades
     public interface IServiceFacadeFactory
     {
         IPersonServiceFacade GetPersonServiceFacade();
+        ITransactionServiceFacade GetTransactionServiceFacade();
+        IAccountServiceFacade GetAccountServiceFacade();
     }
 
     public interface IPersonServiceFacade

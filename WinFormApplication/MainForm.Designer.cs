@@ -57,11 +57,6 @@
             this.transactions_Panel = new System.Windows.Forms.Panel();
             this.transactions_GroupBox = new System.Windows.Forms.GroupBox();
             this.transactions_DataGridView = new System.Windows.Forms.DataGridView();
-            this.transactionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transactionDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transactionSum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transactionDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mainMenuStrip.SuspendLayout();
             this.dashBoard_Panel.SuspendLayout();
             this.transaction_GroupBox.SuspendLayout();
@@ -229,7 +224,7 @@
             this.beginTransaction_Button.TabIndex = 8;
             this.beginTransaction_Button.Text = "Совершить";
             this.beginTransaction_Button.UseVisualStyleBackColor = true;
-            this.beginTransaction_Button.Click += new System.EventHandler(this.beginTransaction_Button_Click);
+            this.beginTransaction_Button.Click += new System.EventHandler(this.BeginTransaction_Button_Click);
             // 
             // userPanel_GroupBox
             // 
@@ -365,58 +360,16 @@
             // transactions_DataGridView
             // 
             this.transactions_DataGridView.AllowUserToAddRows = false;
-            this.transactions_DataGridView.AllowUserToDeleteRows = false;
             this.transactions_DataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.transactions_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.transactions_DataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.transactionId,
-            this.transactionDescription,
-            this.transactionSum,
-            this.transactionType,
-            this.transactionDateTime});
             this.transactions_DataGridView.Location = new System.Drawing.Point(6, 19);
             this.transactions_DataGridView.Name = "transactions_DataGridView";
             this.transactions_DataGridView.ReadOnly = true;
             this.transactions_DataGridView.Size = new System.Drawing.Size(592, 344);
             this.transactions_DataGridView.TabIndex = 0;
-            // 
-            // transactionId
-            // 
-            this.transactionId.Frozen = true;
-            this.transactionId.HeaderText = "Идентификатор";
-            this.transactionId.Name = "transactionId";
-            this.transactionId.ReadOnly = true;
-            this.transactionId.Width = 50;
-            // 
-            // transactionDescription
-            // 
-            this.transactionDescription.Frozen = true;
-            this.transactionDescription.HeaderText = "Описание";
-            this.transactionDescription.Name = "transactionDescription";
-            this.transactionDescription.ReadOnly = true;
-            // 
-            // transactionSum
-            // 
-            this.transactionSum.Frozen = true;
-            this.transactionSum.HeaderText = "Сумма";
-            this.transactionSum.Name = "transactionSum";
-            this.transactionSum.ReadOnly = true;
-            // 
-            // transactionType
-            // 
-            this.transactionType.Frozen = true;
-            this.transactionType.HeaderText = "Тип транзакции";
-            this.transactionType.Name = "transactionType";
-            this.transactionType.ReadOnly = true;
-            // 
-            // transactionDateTime
-            // 
-            this.transactionDateTime.Frozen = true;
-            this.transactionDateTime.HeaderText = "Дата и Время";
-            this.transactionDateTime.Name = "transactionDateTime";
-            this.transactionDateTime.ReadOnly = true;
+            this.transactions_DataGridView.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.Transactions_DataGridView_UserDeletedRow);
             // 
             // MainForm
             // 
@@ -476,11 +429,6 @@
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.DataGridView transactions_DataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn transactionId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn transactionDescription;
-        private System.Windows.Forms.DataGridViewTextBoxColumn transactionSum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn transactionType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn transactionDateTime;
     }
 }
 

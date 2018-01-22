@@ -16,17 +16,16 @@ namespace Infrastructure.Services
 
     internal interface IAccountService
     {
-        Account CreateAccount(Account account);
         Account UpdateAccount(Account account);
         Account GetAccount(long accountId);
         void DeleteAccount(long accountId);
+        Account CreateAccount(long personId);
         ICollection<Account> GetAccounts(long personId);
     }
 
     internal interface ITransactionService
     {
-        Transaction CreateTransaction(Transaction transaction);
-        Transaction UpdateTransaction(Transaction transaction);
+        Transaction CreateTransaction(Transaction transaction); 
         Transaction GetTransaction(long transactionId);
         void DeleteTransaction(long transactionId);
         ICollection<Transaction> GetTransactions(long accountId);

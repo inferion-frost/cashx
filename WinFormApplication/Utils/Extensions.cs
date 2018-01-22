@@ -14,7 +14,7 @@ namespace WinFormApplication.Utils
     {
         public static bool HasPeopleInDatabase(this IPersonServiceFacade facade)
         {
-            return facade.GetPeople().Count > 1;
+            return facade.GetPeople().Count > 0;
         }
 
         public static GetPersonDTO GetFirstPerson(this IPersonServiceFacade facade)
