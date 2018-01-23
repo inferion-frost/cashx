@@ -23,7 +23,7 @@ namespace Infrastructure.Facades
         public ITransactionServiceFacade GetTransactionServiceFacade()
         {
             return new TransactionServiceFacade(
-                Mapper, new TransactionService(Connection));
+                Mapper, new TransactionService(Connection,new TransactionProcessorService()));
         }
 
         public IAccountServiceFacade GetAccountServiceFacade()

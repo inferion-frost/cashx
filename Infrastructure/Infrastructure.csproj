@@ -81,6 +81,7 @@
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\PersonService.cs" />
     <Compile Include="Services\Interfaces.cs" />
+    <Compile Include="Services\TransactionProcessorService.cs" />
     <Compile Include="Services\TransactionService.cs" />
   </ItemGroup>
   <ItemGroup>

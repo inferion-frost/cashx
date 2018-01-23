@@ -30,5 +30,6 @@ namespace Infrastructure.Facades
     {
         ICollection<GetTransactionDTO> GetTransactions(long accountId);
         GetTransactionDTO CreateTransaction(CreateTransactionDTO transaction);
+        void DeleteTransaction(long transactionId);
     }
 }

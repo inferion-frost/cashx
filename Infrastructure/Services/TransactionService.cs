@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Infrastructure.Models.Constants;
 using Infrastructure.Models.Entities;
 
 namespace Infrastructure.Services
@@ -10,19 +7,23 @@ namespace Infrastructure.Services
     internal class TransactionService : ITransactionService
     {
         private readonly DbContextFactory _connection;
+        private readonly ITransactionProcessorService _transactionProcessorService;
 
-        public TransactionService(DbContextFactory connection)
+        public TransactionService(
+            DbContextFactory connection,
+            ITransactionProcessorService transactionProcessorService)
         {
-            _connection = connection ?? throw new NullReferenceException();
+            _connection = connection;
+            _transactionProcessorService = transactionProcessorService;
         }
 
         public Transaction CreateTransaction(Transaction transaction)
         {
             using (var context = _connection.GetContext())
             {
-                var accountToUpdate = context.Accounts.Find(transaction.AccountId);
-                accountToUpdate.Balance += (transaction.TransactionType == TransactionType.Incoming)
-                    ? transaction.Balance : -transaction.Balance;
+                context.Transactions.Attach(transaction);
+                context.Entry(transaction).Reference(tr => tr.Account).Load();
+                _transactionProcessorService.Process(ref transaction);
                 context.Transactions.Add(transaction);
                 context.SaveChanges();
             }
@@ -34,6 +35,8 @@ namespace Infrastructure.Services
             using (var context = _connection.GetContext())
             {
                 var transactionToDelete = context.Transactions.Find(transactionId);
+                context.Entry(transactionToDelete).Reference(tr => tr.Account).Load();
+                _transactionProcessorService.Revert(ref transactionToDelete);
                 context.Transactions.Remove(transactionToDelete);
                 context.SaveChanges();
             }

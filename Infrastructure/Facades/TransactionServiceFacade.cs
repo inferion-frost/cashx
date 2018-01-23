@@ -30,6 +30,11 @@ namespace Infrastructure.Facades
             return _mapper.Map<GetTransactionDTO>(transaction);
         }
 
+        public void DeleteTransaction(long transactionId)
+        {
+            _transactionService.DeleteTransaction(transactionId);
+        }
+
         public ICollection<GetTransactionDTO> GetTransactions(long accountId)
         {
             var transactions = _transactionService.GetTransactions(accountId);

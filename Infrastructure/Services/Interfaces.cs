@@ -31,4 +31,10 @@ namespace Infrastructure.Services
         ICollection<Transaction> GetTransactions(long accountId);
     }
 
+    internal interface ITransactionProcessorService
+    {
+        void Process(ref Transaction transaction);
+        void Revert(ref Transaction transaction);
+    }
+
 }

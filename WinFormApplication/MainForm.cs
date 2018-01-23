@@ -3,6 +3,8 @@ using Infrastructure.Models.Constants;
 using Infrastructure.Models.DTO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -19,7 +21,7 @@ namespace WinFormApplication
         private ITransactionServiceFacade transactionService = ServiceProvider.GetTransactionService();
 
         private BindingSource _bindingSource = new BindingSource();
-        private IList<GetTransactionDTO> _transactions;
+        private ObservableCollection<GetTransactionDTO> _transactions;
         private IDictionary<TransactionType, String> _transactionTypes = new Dictionary<TransactionType, String>()
         {
             { TransactionType.Incoming,"Доход" },
@@ -40,7 +42,8 @@ namespace WinFormApplication
 
             _currentUserId = currentUser.Id;
             _currentAccountId = currentUserAccount.Id;
-            _transactions = transactionService.GetTransactions(_currentAccountId).Reverse().ToList();
+            _transactions = new ObservableCollection<GetTransactionDTO>(transactionService.GetTransactions(_currentAccountId).Reverse());
+            _transactions.CollectionChanged += _transactions_CollectionChanged;
             _bindingSource.DataSource = _transactions;
 
             transactions_DataGridView.AutoGenerateColumns = false;
@@ -88,6 +91,16 @@ namespace WinFormApplication
             balance_TextBox.Text = currentUserAccount.Balance.ToString();
         }
 
+        private void _transactions_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (GetTransactionDTO transaction in e.OldItems)
+                    transactionService.DeleteTransaction(transaction.Id);
+            }
+            RefreshAccountLabel();
+        }
+
         private void BeginTransaction_Button_Click(object sender, EventArgs e)
         {
             try
@@ -104,7 +117,7 @@ namespace WinFormApplication
                 });
                 _transactions.Insert(0, transaction);
                 _bindingSource.ResetBindings(true);
-                refreshAccount(transaction);
+                RefreshAccountLabel();
             }
             catch (Exception ex)
             {
@@ -117,14 +130,14 @@ namespace WinFormApplication
             Application.Exit();
         }
 
-        private void refreshAccount(GetTransactionDTO transactionDTO)
+        private void RefreshAccountLabel()
         {
             balance_TextBox.Text = accountService.GetAccount(_currentAccountId).Balance.ToString();
         }
 
         private void Transactions_DataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
-            ///Transaction Deletion not implemented Yet;
+            
         }
     }
 }
