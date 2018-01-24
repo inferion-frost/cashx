@@ -45,6 +45,7 @@ namespace WinFormApplication
             _transactions = new ObservableCollection<GetTransactionDTO>(transactionService.GetTransactions(_currentAccountId).Reverse());
             _transactions.CollectionChanged += _transactions_CollectionChanged;
             _bindingSource.DataSource = _transactions;
+            _transactionsNavigator.BindingSource = _bindingSource;
 
             transactions_DataGridView.AutoGenerateColumns = false;
             transactions_DataGridView.AutoSize = true;
@@ -133,11 +134,6 @@ namespace WinFormApplication
         private void RefreshAccountLabel()
         {
             balance_TextBox.Text = accountService.GetAccount(_currentAccountId).Balance.ToString();
-        }
-
-        private void Transactions_DataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
-        {
-            
         }
     }
 }

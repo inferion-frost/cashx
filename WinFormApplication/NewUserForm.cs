@@ -37,7 +37,7 @@ namespace WinFormApplication
                 personService.CreatePerson(newPerson);
                 Close();
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 MessageBox.Show("Попробуйте заполнить все поля");
             }
