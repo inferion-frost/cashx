@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormApplication", "WinFormApplication\WinFormApplication.csproj", "{9378F8D1-B42D-488A-9EFF-F9E25E20635F}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AppSetup", "AppSetup\AppSetup.vdproj", "{51A16891-DD23-47F3-95DD-3C55B0E99FE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{9378F8D1-B42D-488A-9EFF-F9E25E20635F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9378F8D1-B42D-488A-9EFF-F9E25E20635F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9378F8D1-B42D-488A-9EFF-F9E25E20635F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51A16891-DD23-47F3-95DD-3C55B0E99FE0}.Debug|Any CPU.ActiveCfg = Debug
+		{51A16891-DD23-47F3-95DD-3C55B0E99FE0}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
